@@ -33,7 +33,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 app.use(express.json({ limit: '10kb' }));
 
-// Limit req from same IP
+// limit req from same IP
 app.use(mongoSanitize());
 
 app.use(xss());
