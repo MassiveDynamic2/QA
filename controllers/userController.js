@@ -1,7 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 // const factory = require('./handlerFactory');
 const User = require('../models/userModel');
-const QA = require('../models/questionAnswerModel');
 const AppError = require('../utils/appError');
 
 // GET ALL
