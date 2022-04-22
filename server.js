@@ -8,8 +8,6 @@ process.on('uncaughtException', (err) => {
 	process.exit(1);
 });
 
-const TEST = 'oerm';
-
 dotenv.config({ path: './config.env' });
 
 const app = require('./app');
