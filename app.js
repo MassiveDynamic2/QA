@@ -21,13 +21,13 @@ app.use(helmet());
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 const limiter = rateLimit({
-	max: 100,
-	windowMs: 60 * 60 * 1000,
-	message: 'Too many requests from this IP! Try again in an hour.',
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP! Try again in an hour.',
 });
 
 app.use('/api', limiter);
@@ -38,17 +38,10 @@ app.use(mongoSanitize());
 
 app.use(xss());
 
-app.use(
-	hpp({
-		whitelist: [
-			'duration',
-			'ratingsQuantity',
-			'maxGroupSize',
-			'difficulty',
-			'price',
-		],
-	}),
-);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.use(compression());
 
@@ -59,7 +52,7 @@ app.use('/api/v1/result', resultRoute);
 
 // TO HANDLE ALL UNDEFINED ROUTS
 app.all('*', (req, res, next) => {
-	next(new AppError(`this route is not supported ${req.originalUrl}`, 404));
+  next(new AppError(`this route is not supported ${req.originalUrl}`, 404));
 });
 
 app.use(globalErrorHandler);
