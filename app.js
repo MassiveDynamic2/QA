@@ -4,6 +4,8 @@ const xss = require('xss-clean');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
+const cors = require('cors');
+
 const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const QARoutes = require('./routes/questionAnswerRoutes');
@@ -15,6 +17,7 @@ const AppError = require('./utils/appError');
 const app = express();
 
 // MIDDLEWARE
+app.use(cors());
 
 app.use(helmet());
 
