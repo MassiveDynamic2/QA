@@ -38,11 +38,6 @@ app.use(mongoSanitize());
 
 app.use(xss());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 app.use(compression());
 
 // ROUTES
